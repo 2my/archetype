@@ -1,0 +1,44 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:c="http://java.sun.com/jsp/jstl/core" 
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:a4j="http://richfaces.org/a4j"
+    xmlns:rich="http://richfaces.org/rich"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    template="template/template.xhtml">
+
+    <ui:define name="title">Archetype web demo</ui:define>
+
+    <ui:define name="content">
+    	<h:form id="loadItemForm">
+    		Objekt id: <h:inputText id="selectItemId" value="#{itemBean.selectedId}" />
+       		<h:commandButton id="loadItem" value="last inn" action="#{itemBean.send}" />
+		</h:form>
+
+
+		<h:form id="saveItemForm">
+			<div>				
+				<!-- Accordion -->
+				<div>
+					<rich:simpleTogglePanel switchType="client" label="Objektsdetaljer">
+						<table>
+							<tbody>
+								<tr>
+									<td id="itemName">
+										Name <h:outputText value="#{itemBean.selectedItem.name}" />
+									</td>
+									<td>(TODO: dropdown)</td>
+								</tr>
+							</tbody>
+						</table>
+		   			</rich:simpleTogglePanel>
+
+					<!-- about iteration: http://dogic.blogspot.com/2005/07/iteration-tags-with-jsf-part-1.html --> 
+				</div><!-- End Simple Toggle panel -->
+			</div>
+			<h:commandButton id="saveItem" value="lagre" action="#{itemBean.save}" />
+		</h:form>
+   </ui:define>
+</ui:composition>
+

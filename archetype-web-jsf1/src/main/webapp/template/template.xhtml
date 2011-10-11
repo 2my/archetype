@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" 
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:a4j="http://richfaces.org/a4j"
+	  xmlns:h="http://java.sun.com/jsf/html" 
+	  xmlns:f="http://java.sun.com/jsf/core">
+
+<head>
+	<title><ui:insert name="title" /></title>
+<!--
+<style type="text/css">
+@import url("./css/main.css");
+</style>-->
+
+<script>
+function changeCursor() {
+	// document.body.style.cursor=(document.body.style.cursor=="wait") ? "default" : "wait";
+} 
+</script>
+
+</head>
+
+<!--[if lt IE 7 ]> <body class="ie6"> <![endif]-->
+<!--[if IE 7 ]>    <body class="ie7"> <![endif]-->
+<!--[if IE 8 ]>    <body class="ie8"> <![endif]-->
+<!--[if IE 9 ]>    <body class="ie9"> <![endif]-->
+<!--[if (gt IE 9)|!(IE)]><!--> <body> <!--<![endif]-->
+
+	<div id="pagewidth">
+		<div id="header">
+			<div id="headerContent">
+				<ui:include src="header.xhtml" />
+			</div>
+		</div>
+		
+		<div id="layoutWrapper">
+			<div id="mainContent">
+				<ui:insert name="content" />
+			</div>	
+		</div>
+		<div id="footer">
+			<div id="footerContent">
+				<ui:include src="footer.xhtml" />
+			</div>
+		</div>
+	</div>
+	</body>	
+</html>
