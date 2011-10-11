@@ -2,3 +2,9 @@ archetype-web-jsf1/log
 archetype-web-jsf1/target
 archetype-repository/target
 archetype-domain/target
+.project
+.settings
+**/.project
+**/.settings
+**/.classpath
+local.itest.properties
