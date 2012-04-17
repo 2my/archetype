@@ -43,9 +43,9 @@
             <version>1.4</version>
         </dependency>
         <dependency>
-			<groupId>oracle</groupId>
-			<artifactId>ojdbc14</artifactId>
-			<version>9.2.0.5</version>
+					<groupId>oracle</groupId>
+					<artifactId>ojdbc14</artifactId>
+					<version>9.2.0.5</version>
         </dependency>
     </dependencies>
 </project>
