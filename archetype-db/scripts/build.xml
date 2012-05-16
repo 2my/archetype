@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<project name="sdb_demo_load" default="" basedir=".">
+	<description>
+		The scripts in here are used to:
+		export data from database
+		convert the export to a format usable by this version of ant (Maven is not up to date)
+		import converted data into database again (clearing existing data).
+		clear database
+
+		The scripts are normally (generated and) run from maven (get libraries listed below to run standalone).
+	</description>
+
+	<property environment="env" />
+
+	<property name="db.driver" value="net.sourceforge.jtds.jdbc.Driver" />
+	<property name="db.url" value="jdbc:jtds:sybase://URL" />
+	<property name="db.username" value="npsfeed_dev" />
+	<property name="db.schema" value="USER" />
+	<property name="db.password" value="PASSWORD" />
+
+	<property name="dbdump.dir" value="dbdump" />
+	<property name="dataset.new" value="DbUnitTestData.xml" />
+	<property name="dataset" value="${dbdump.dir}/Data2Load_OldFormat.xml" />
+
+	<property name="dataTypeFactory" value="org.dbunit.dataset.datatype.DefaultDataTypeFactory" />
+
+
+	<!-- Maven provides, but if u want to run outside, get these: (ojdbc = Oracle jdbc driver) -->
+	<path id="classpath">
+		<fileset dir="." casesensitive="yes">
+			<include name="bin/dbunit-2.4.8.jar" />
+			<include name="bin/jtds-1.2.4.jar" />
+			<include name="bin/slf4j-api-1.5.10.jar" />
+			<include name="bin/slf4j-log4j12-1.5.6.jar" />
+			<include name="bin/log4j-1.2.15.jar" />
+			<!--
+			<include name="${env.M2_REPO}/org/dbunit/dbunit/2.4.8/dbunit-2.4.8.jar" />
+			<include name="${env.M2_REPO}/oracle/ojdbc14/9.2.0.5/ojdbc14-9.2.0.5.jar" />
+			<include name="${env.M2_REPO}/org/slf4j/slf4j-api/1.5.10/slf4j-api-1.5.10.jar" />
+			-->
+		</fileset>
+	</path>
+
+	<!-- ==================== Targets ====================================== -->
+
+	<target name="init" description="define tasks and create output directory" >
+		<taskdef name="dbunit" classname="org.dbunit.ant.DbUnitTask" >
+			<classpath refid="classpath" />
+		</taskdef>
+		<mkdir dir="${dbdump.dir}" />
+	</target>
+
+	<target name="clean" description="empty tables">
+		<delete dir="${dbdump.dir}" />
+		<sql src="cleanDB.sql" userid="${db.username}" password="${db.password}" driver="${db.driver}" url="${db.url}" >
+			<classpath refid="classpath" />
+		</sql>
+	</target>
+
+	<target name="initDB" depends="clean" description="clean db and insert dbunit dataset" >
+		<sql userid="${db.username}" password="${db.password}" driver="${db.driver}" url="${db.url}" >
+			<classpath refid="classpath" />
+			<!-- transaction  src="icard_backup/ICARD_BACKUP-DEMOK.sql" / -->
+		</sql>
+		<ant target="refreshDB" />
+	</target>
+
+	<target name="refreshDB" depends="xsl2flat" description="refresh data in db (except ICARD_BACKUP, ICARD_COMPANY ICARD_ENGAGE)" >
+		<dbunit schema="${db.schema}" userid="${db.username}" password="${db.password}" driver="${db.driver}" url="${db.url}" datatypeFactory="${dataTypeFactory}" >
+			<operation type="REFRESH" src="${dataset}" transaction="true" format="xml" />
+		</dbunit>
+		<!-- remove records from web_application_log inserted by trigger that was fired by the above import 
+		I did this in code, so we don't have to run import / db scripts
+		<sql userid="${db.username}" password="${db.password}" driver="${db.driver}" url="${db.url}" >
+			<classpath refid="classpath" />
+			delete from ${db.username}.web_application_log where credit_application_id &lt; 100
+		</sql>
+		-->
+	</target>
+
+	<target name="exportTable" depends="init" description="export dbunit dataset from TABLE_NAME" >
+		<dbunit userid="${db.username}" password="${db.password}" driver="${db.driver}" url="${db.url}" >
+			<export dest="${dbdump.dir}/demoSdbWebApplicationLog.xml" format="xml" >
+				<query name="TABLE_NAME" sql="SELECT * FROM ${db.username}.TABLE_NAME" />
+			</export>
+		</dbunit>
+	</target>
+
+	<target name="exportDB" depends="init" description="export dbunit dataset from all tables" >
+		<!-- Export full dataset, then records from web_application_log in a separate file -->
+		<dbunit userid="${db.username}" password="${db.password}" driver="${db.driver}" url="${db.url}" >
+			<dbconfig>
+				<property name="http://www.dbunit.org/properties/datatypeFactory" value="${dataTypeFactory}" />
+			</dbconfig>
+			<export dest="${dbdump.dir}/temp.xml" />
+		</dbunit>
+	</target>
+
+	<target name="cleanExportedTables" depends="init" description="remove troublesome tables from dataset (ICARD_BACKUP++)" >
+		<!--  FixMe: could convert to sql files... -->
+		<xslt in="${dbdump.dir}/temp.xml" out="${dbdump.dir}/demoSdbAllData.xml" style="removeSomeTablesFromDump.xsl">
+			<outputproperty name="encoding" value="utf8" />
+		</xslt>
+	</target>
+
+	<target name="xsl2readable" depends="init" description="convert from new (flat) to old dbunit formats" >
+		<xslt in="${dbdump.dir}/partial.xml" out="${dbdump.dir}/partialReadable.xml" style="dbUnitNew2Old.xsl">
+			<outputproperty name="encoding" value="utf8" />
+		</xslt>
+	</target>
+
+	<target name="xsl2flat" depends="init" description="convert from old to new (flat) dbunit formats" >
+		<!-- Can start using new format when Maven gets latest ant / dbunit, until then export should be converted -->
+		<xslt in="${dataset.new}" out="${dataset}" style="dbUnitOld2new.xsl">
+			<outputproperty name="encoding" value="utf8" />
+		</xslt>
+	</target>
+
+</project>
