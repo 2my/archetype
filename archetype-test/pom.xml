@@ -1,0 +1,103 @@
+<?xml version="1.0"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd"
+>
+
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>no.antares.kickstart</groupId>
+        <artifactId>archetype-parent</artifactId>
+        <version>1.0-SNAPSHOT</version>
+    </parent>
+
+    <groupId>no.antares.kickstart</groupId>
+    <artifactId>archetype-test</artifactId>
+    <name>Archetype test utilities</name>
+
+    <packaging>jar</packaging>
+
+    <properties>
+    </properties>
+
+    <build>
+			<plugins>
+				<plugin>
+					<!-- make an artifact from test source as well -->
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-jar-plugin</artifactId>
+					<version>2.2</version>
+					<executions>
+						<execution>
+							<goals>
+								<goal>test-jar</goal>
+							</goals>
+						</execution>
+					</executions>
+					<!-- import with:
+						<dependency>
+							<groupId>${archetype.version}</groupId>
+							<artifactId>archetype-domain</artifactId>
+							<version>${archetype.version}</version>
+							<type>test-jar</type>
+							<scope>test</scope>
+						</dependency>
+					-->
+				</plugin>
+			</plugins>
+    </build>
+
+    <dependencies>
+			<dependency>
+					<groupId>commons-lang</groupId>
+					<artifactId>commons-lang</artifactId>
+					<version>2.6</version>
+			</dependency>
+
+			<!-- JUNIT + MOCKITO or JMOCK FOR TESTING -->
+			<dependency>
+					<groupId>junit</groupId>
+					<artifactId>junit-dep</artifactId>
+					<version>4.10</version>
+			</dependency>
+			<dependency>
+					<groupId>org.mockito</groupId>
+					<artifactId>mockito-core</artifactId>
+					<version>1.8.5</version>
+			</dependency>
+			<dependency>	<!-- http://www.jmock.org -->
+					<groupId>org.jmock</groupId>
+					<artifactId>jmock-junit4</artifactId>
+					<version>2.5.1</version>
+			</dependency>
+			<dependency>	<!-- class mocking -->
+					<groupId>org.jmock</groupId>
+					<artifactId>jmock-legacy</artifactId>
+					<version>2.5.1</version>
+			</dependency>
+			<dependency>
+					<groupId>org.hamcrest</groupId>
+					<artifactId>hamcrest-library</artifactId>
+					<version>1.1</version>
+			</dependency>
+
+      <dependency>
+				<groupId>no.antares</groupId>
+				<artifactId>test.data-control</artifactId>
+				<version>0.8.2</version>
+				<exclusions>
+					<exclusion>
+						<groupId>oracle</groupId>
+						<artifactId>ojdbc14</artifactId>
+					</exclusion>
+				</exclusions>
+			</dependency>
+	
+			<dependency>    <!-- http://www.scala-lang.org -->
+				<groupId>org.scala-lang</groupId>
+				<artifactId>scala-library</artifactId>
+				<version>2.9.1</version>
+			</dependency>
+    </dependencies>
+</project>

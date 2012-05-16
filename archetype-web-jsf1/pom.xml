@@ -98,14 +98,14 @@
 
     <dependencies>
         <dependency>
-            <groupId>no.antares.kickstart</groupId>
+            <groupId>${archetype.groupId}</groupId>
             <artifactId>archetype-domain</artifactId>
-            <version>${project-version}</version>
+            <version>${archetype.version}</version>
         </dependency>
         <dependency>
-            <groupId>no.antares.kickstart</groupId>
+            <groupId>${archetype.groupId}</groupId>
             <artifactId>archetype-repository</artifactId>
-            <version>${project-version}</version>
+            <version>${archetype.version}</version>
         </dependency>
 
         <dependency>
