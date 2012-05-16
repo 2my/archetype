@@ -13,8 +13,8 @@
     </parent>
 
     <groupId>no.antares.kickstart</groupId>
-    <artifactId>archetype-domain</artifactId>
-    <name>Archetype Domain Model</name>
+    <artifactId>archetype-db</artifactId>
+    <name>Archetype DataBase utilities etc</name>
 
     <packaging>jar</packaging>
 
@@ -37,9 +37,9 @@
 					</executions>
 					<!-- import with:
 						<dependency>
-							<groupId>no.antares.kickstart</groupId>
+							<groupId>${archetype.version}</groupId>
 							<artifactId>archetype-domain</artifactId>
-							<version>1.0-SNAPSHOT</version>
+							<version>${archetype.version}</version>
 							<type>test-jar</type>
 							<scope>test</scope>
 						</dependency>
@@ -49,5 +49,39 @@
     </build>
 
     <dependencies>
+        <dependency>
+            <groupId>commons-lang</groupId>
+            <artifactId>commons-lang</artifactId>
+            <version>2.6</version>
+        </dependency>
+        <dependency>
+            <groupId>commons-lang</groupId>
+            <artifactId>commons-lang</artifactId>
+            <version>2.6</version>
+        </dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-jdbc</artifactId>
+			<version>3.1.1.RELEASE</version>
+		</dependency>
+
+      <dependency>
+				<groupId>no.antares</groupId>
+				<artifactId>test.data-control</artifactId>
+				<version>0.8.2</version>
+				<exclusions>
+					<exclusion>
+						<groupId>oracle</groupId>
+						<artifactId>ojdbc14</artifactId>
+					</exclusion>
+				</exclusions>
+			</dependency>
+	
+			<dependency>    <!-- http://www.scala-lang.org -->
+				<groupId>org.scala-lang</groupId>
+				<artifactId>scala-library</artifactId>
+				<version>2.9.1</version>
+				<scope>test</scope>
+			</dependency>
     </dependencies>
 </project>
