@@ -33,7 +33,7 @@ public class SpringWiring {
 
 	/** Using development Spring configuration */
 	public SpringWiring() {
-		this( Constants.TS_XML_BEANS_RESOURCE_NAME, "dataSource" );
+		this( "spring.config.xml", "dataSource" );
 	}
 	/** Using specified Spring configuration */
 	private SpringWiring( String springConfig, String dataSourceBean ) {
