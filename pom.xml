@@ -22,15 +22,20 @@
     <packaging>pom</packaging>
 
     <modules>
+        <module>archetype-db</module>
+
         <module>archetype-domain</module>
         <module>archetype-repository</module>
         <module>archetype-web-jsf1</module>
     </modules>
 
     <properties>
-        <project-version>1.0-SNAPSHOT</project-version>
+      <!-- In order to keep same version on all submodules -->
+      <!-- parametrize groupId also to keep release plugin off module dependency versioning -->
+    	<archetype.groupId>${groupId}</archetype.groupId>
+    	<archetype.version>${version}</archetype.version>
 
-        <spring-version>3.0.6.RELEASE</spring-version>
+			<spring-version>3.0.6.RELEASE</spring-version>
     </properties>
 
     <!-- url>TODO</url -->
@@ -202,17 +207,35 @@
             <version>1.2.16</version>
         </dependency>
 
-        <!-- JUNIT + MOCKITO FOR TESTING -->
+        <!-- JUNIT + MOCKITO or JMOCK FOR TESTING -->
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
-            <version>4.8.1</version>
+            <version>4.10</version>
             <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>org.mockito</groupId>
             <artifactId>mockito-core</artifactId>
             <version>1.8.5</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>	<!-- http://www.jmock.org -->
+            <groupId>org.jmock</groupId>
+            <artifactId>jmock-junit4</artifactId>
+            <version>2.5.1</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>	<!-- class mocking -->
+            <groupId>org.jmock</groupId>
+            <artifactId>jmock-legacy</artifactId>
+            <version>2.5.1</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.hamcrest</groupId>
+            <artifactId>hamcrest-library</artifactId>
+            <version>1.2.1</version>
             <scope>test</scope>
         </dependency>
     </dependencies>

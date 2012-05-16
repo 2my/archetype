@@ -26,9 +26,9 @@
 
     <dependencies>
         <dependency>
-            <groupId>no.antares.kickstart</groupId>
+            <groupId>${archetype.groupId}</groupId>
             <artifactId>archetype-domain</artifactId>
-            <version>${project-version}</version>
+            <version>${archetype.version}</version>
         </dependency>
 
         <dependency>
@@ -42,10 +42,12 @@
             <artifactId>commons-dbcp</artifactId>
             <version>1.4</version>
         </dependency>
+        <!--
         <dependency>
 					<groupId>oracle</groupId>
 					<artifactId>ojdbc14</artifactId>
 					<version>9.2.0.5</version>
         </dependency>
+        -->
     </dependencies>
 </project>
