@@ -22,6 +22,7 @@
     <packaging>pom</packaging>
 
     <modules>
+        <module>archetype-test</module>
         <module>archetype-db</module>
 
         <module>archetype-domain</module>
@@ -207,36 +208,5 @@
             <version>1.2.16</version>
         </dependency>
 
-        <!-- JUNIT + MOCKITO or JMOCK FOR TESTING -->
-        <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
-            <version>4.10</version>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.mockito</groupId>
-            <artifactId>mockito-core</artifactId>
-            <version>1.8.5</version>
-            <scope>test</scope>
-        </dependency>
-        <dependency>	<!-- http://www.jmock.org -->
-            <groupId>org.jmock</groupId>
-            <artifactId>jmock-junit4</artifactId>
-            <version>2.5.1</version>
-            <scope>test</scope>
-        </dependency>
-        <dependency>	<!-- class mocking -->
-            <groupId>org.jmock</groupId>
-            <artifactId>jmock-legacy</artifactId>
-            <version>2.5.1</version>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.hamcrest</groupId>
-            <artifactId>hamcrest-library</artifactId>
-            <version>1.2.1</version>
-            <scope>test</scope>
-        </dependency>
     </dependencies>
 </project>

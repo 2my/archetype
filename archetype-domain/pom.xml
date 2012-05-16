@@ -49,5 +49,11 @@
     </build>
 
     <dependencies>
+        <dependency>
+            <groupId>${archetype.groupId}</groupId>
+            <artifactId>archetype-test</artifactId>
+            <version>${archetype.version}</version>
+            <scope>test</scope>
+        </dependency>
     </dependencies>
 </project>
