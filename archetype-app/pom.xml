@@ -24,27 +24,27 @@
     <build>
     	<finalName>Archetype app ${parent.version}</finalName>
 			<plugins>
-				<plugin>
+					<plugin>
 						<artifactId>maven-assembly-plugin</artifactId>
 						<configuration>
-								<archive>
-										<manifest>
-												<mainClass>no.antares.kickstart.KickStart</mainClass>
-										</manifest>
-								</archive>
-								<descriptorRefs>
-										<descriptorRef>jar-with-dependencies</descriptorRef>
-								</descriptorRefs>
+							<archive>
+								<manifest>
+									<mainClass>no.antares.kickstart.KickStart</mainClass>
+								</manifest>
+							</archive>
+							<descriptorRefs>
+								<descriptorRef>jar-with-dependencies</descriptorRef>
+							</descriptorRefs>
 						</configuration>
-					<executions>
-						<execution>
-							<phase>install</phase>
-							<goals>
-								<goal>single</goal>
-							</goals>
-						</execution>
-					</executions>
-				</plugin>
+						<executions>
+							<execution>
+								<phase>install</phase>
+								<goals>
+									<goal>single</goal>
+								</goals>
+							</execution>
+						</executions>
+					</plugin>
 				<!--
 				<plugin>
 					<groupId>org.apache.maven.plugins</groupId>
