@@ -1,6 +1,10 @@
-import org.apache.commons.lang.ArrayUtils;
+import java.util.*;
+
+import org.apache.commons.collections.CollectionUtils;
+import org.apache.commons.collections.ListUtils;
 import org.apache.commons.lang.StringUtils;
-import org.hamcrest.*;
+import org.hamcrest.Description;
+import org.hamcrest.TypeSafeMatcher;
 
 /** Matcher for model objects
  * @author Tommy Skodje
@@ -15,7 +19,7 @@ public abstract class PropertyListMatcher<T> extends TypeSafeMatcher<T> {
 		CollectionUtils.addAll( expected, expectedValues );
 	}
 	@Override public boolean matchesSafely( T actual ) {
-		Collection actuals	= properties( actual );
+		Collection<?> actuals	= properties( actual );
 		return ListUtils.isEqualList( expected, actuals );
 	}
 	public void describeTo(Description description) {
