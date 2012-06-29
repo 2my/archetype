@@ -16,7 +16,7 @@ public class JsonMatcherTest {
     	assertThat( actual, JsonMatcher.matcher( same ) );
 
 		JSONObject different = new JSONObject( "{'a': [ { 'aa': 'AA1', 'bb': 'BB1' }, { 'aa': 'DIFFERENT', 'bb': 'BB2' } ] }" );
-    	assertThat( actual, JsonMatcher.matcher( different ) );
+    	assertThat( actual, not( JsonMatcher.matcher( different ) ) );
    	}
 
 }
