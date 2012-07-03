@@ -22,7 +22,7 @@
     </properties>
 
     <build>
-    	<finalName>Archetype app ${parent.version}</finalName>
+    	<finalName>HitMan-${parent.version}</finalName>
 		<plugins>
 				<plugin>
 					<artifactId>maven-assembly-plugin</artifactId>
@@ -30,7 +30,7 @@
 						<archive>
 							<manifest>
 								<!-- <mainClass>no.antares.kickstart.KickStart</mainClass> -->
-								<mainClass>no.antares.kickstart.app.hitman.HitMan</mainClass>
+								<mainClass>no.antares.kickstart.app.hitman.Main</mainClass>
 							</manifest>
 						</archive>
 						<descriptorRefs>

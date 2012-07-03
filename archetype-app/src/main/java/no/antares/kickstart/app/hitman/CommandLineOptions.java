@@ -2,7 +2,10 @@ package no.antares.kickstart.app.hitman;
 
 import org.apache.commons.cli.*;
 
-public class CommandLineOptions {
+/**
+ * @author tommy skodje
+*/
+class CommandLineOptions {
 	static Option portArg = option("port", "port to bind to", "port");
 	static Option commandArg = option("cmd", "command (process) to run", "command");
 	static Option help = new Option("help", "print this message");
@@ -13,7 +16,7 @@ public class CommandLineOptions {
 	final String command;
 	final Options options = new Options();
 
-	public CommandLineOptions( String[] args ) {
+	protected CommandLineOptions( String[] args ) {
 		options.addOption(messageArg);
 		options.addOption(commandArg);
 		options.addOption(portArg);
@@ -43,9 +46,9 @@ public class CommandLineOptions {
 			command = null;
 	}
 
-	public void printHelp() {
+	protected void printHelp( String startCommand ) {
 		HelpFormatter formatter = new HelpFormatter();
-		formatter.printHelp("java -jar janitor.jar", options);
+		formatter.printHelp( startCommand, options);
 	}
 
 	@Override public String toString() {
