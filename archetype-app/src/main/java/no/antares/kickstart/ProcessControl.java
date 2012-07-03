@@ -17,7 +17,7 @@ public class ProcessControl {
 		final Process proc = Runtime.getRuntime().exec(execStr);  
 		System.out.println("proc: " + proc);
 		return new Runnable() {
-			@Override public void run() {
+			public void run() {
 				proc.destroy();  
 				System.out.println("destroyed");  
 			}
