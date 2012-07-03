@@ -6,21 +6,17 @@ import org.apache.commons.cli.*;
  * @author tommy skodje
 */
 class CommandLineOptions {
-	static Option portArg = option("port", "port to bind to", "port");
-	static Option commandArg = option("cmd", "command (process) to run", "command");
-	static Option help = new Option("help", "print this message");
-	static Option messageArg = option("msg", "message to send", "message");
-
-	final int portNo;
+	final Integer portNo;
 	final String message;
 	final String command;
-	final Options options = new Options();
+
+	private final Options options = new Options();
 
 	protected CommandLineOptions( String[] args ) {
-		options.addOption(messageArg);
-		options.addOption(commandArg);
-		options.addOption(portArg);
-		options.addOption(help);
+		Option help = addOption( "help", "print this message" );
+		Option portArg = addOption( "port", "port to bind to", "port" );
+		Option commandArg = addOption( "cmd", "command (process) to run", "command" );
+		Option messageArg = addOption( "msg", "message to send", "message" );
 
 		CommandLineParser parser = new GnuParser();
 		CommandLine cmd;
@@ -30,20 +26,13 @@ class CommandLineOptions {
 			throw new RuntimeException( "Error parsing" , pe );
 		}
 
-		if ( cmd.hasOption( portArg.getOpt() ) )
-			portNo = Integer.parseInt( cmd.getOptionValue( portArg.getOpt() ) );
+		String port	= cmd.getOptionValue( portArg.getOpt(), null );
+		if ( port == null )
+			portNo	= null;
 		else
-			portNo = -1;
-
-		if ( cmd.hasOption( messageArg.getOpt()) )
-			message = cmd.getOptionValue( messageArg.getOpt() );
-		else
-			message = null;
-
-		if ( cmd.hasOption( commandArg.getOpt() ) )
-			command = cmd.getOptionValue( commandArg.getOpt() );
-		else
-			command = null;
+			portNo = Integer.valueOf( port );
+		message = cmd.getOptionValue( messageArg.getOpt(), null );
+		command = cmd.getOptionValue( commandArg.getOpt(), null );
 	}
 
 	protected void printHelp( String startCommand ) {
@@ -55,11 +44,17 @@ class CommandLineOptions {
 		return "CommandLineOptions [portNo=" + portNo + ", signal=" + message + ", command=" + command + "]";
 	}
 
-	private static Option option( String name, String description, String argName ) {
-		return OptionBuilder.withArgName(argName)
-				.hasArg()
-				.withDescription(description)
-				.create(name);
+	private Option addOption( String opt, String description ) {
+		Option option = new Option( opt, description );
+		options.addOption(option);
+		return option;
+	}
+
+	private Option addOption( String opt, String description, String argName ) {
+		Option option = new Option( opt, true, description );
+		option.setArgName(argName);
+		options.addOption(option);
+		return option;
 	}
 
 }

@@ -20,7 +20,7 @@ public class Main {
 	*/
 	public static void main(String[] args) throws Exception {
 		CommandLineOptions options	= new CommandLineOptions( args );
-		if ( 0 < options.portNo ) {
+		if ( options.portNo != null ) {
 			System.err.println( options.toString() );
 			if ( ! StringUtils.isBlank( options.command ) ) {
 				HitMan.runHitMan( options.portNo, options.command );
