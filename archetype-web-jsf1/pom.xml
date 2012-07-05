@@ -193,6 +193,38 @@
             <version>${spring-version}</version>
         </dependency>
 
+		<!-- JUNIT + MOCKITO or JMOCK FOR TESTING -->
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit-dep</artifactId>
+			<version>4.10</version>
+            <scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.mockito</groupId>
+			<artifactId>mockito-core</artifactId>
+			<version>1.8.5</version>
+            <scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.hamcrest</groupId>
+			<artifactId>hamcrest-library</artifactId>
+			<version>1.1</version>
+            <scope>test</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>no.antares</groupId>
+			<artifactId>test.data-control</artifactId>
+			<version>0.8.2</version>
+            <scope>test</scope>
+			<exclusions>
+				<exclusion>
+					<groupId>oracle</groupId>
+					<artifactId>ojdbc14</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
         <!-- JETTY + SELENIUM FOR TESTING -->
         <dependency>
             <groupId>org.eclipse.jetty</groupId>
