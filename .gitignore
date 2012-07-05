@@ -8,3 +8,6 @@ archetype-domain/target
 **/.settings
 **/.classpath
 local.itest.properties
+archetype-test/target
+archetype-app/target
+archetype-db/target
